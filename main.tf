@@ -37,7 +37,7 @@ resource "azurerm_storage_account" "storage" {
   name                     = "sto${var.class_name}${var.student_name}${var.environment}${random_integer.deployment_id_suffix.result}"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
-  account_tier             = "Basic"
+  account_tier             = "Standard"
   account_replication_type = "LRS"
 
   // Network Rules
@@ -90,7 +90,7 @@ resource "azurerm_mssql_database" "db" {
   collation    = "SQL_Latin1_General_CP1_CI_AS"
   license_type = "LicenseIncluded"
   max_size_gb  = 2
-  sku_name     = "S0"
+  sku_name     = "Basic"
   enclave_type = "VBS"
 
   tags = {
