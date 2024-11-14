@@ -40,6 +40,14 @@ resource "azurerm_storage_account" "storage" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
+  // Network Rules
+
+network_rules {
+  default_action             = "Deny"
+  ip_rules                   = ["100.0.0.1"]
+  virtual_network_subnet_ids = [azurerm_subnet.snet.id]
+ }
+
   tags = local.tags
 }
 
@@ -62,12 +70,6 @@ resource "azurerm_subnet" "snet" {
   service_endpoints    = ["Microsoft.Sql", "Microsoft.Storage"]
 }
 
-// Network Rules
 
-network_rules {
-  default_action             = "Deny"
-  ip_rules                   = ["100.0.0.1"]
-  virtual_network_subnet_ids = [azurerm_subnet.snet.id]
-}
 
 
